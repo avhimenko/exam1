@@ -1,2 +1,3 @@
 # exam1
 краткое ТЗ: Создать абстрактный класс Figure с методами вычисления площади и периметра, а также методом, выводящим информацию о фигуре на экран. Создать производные классы: Triangle (треугольник), Circle (круг) со своими методами вычисления площади и периметра. Создать массив n фигур и вывести полную информацию о фигурах на экран
+EN: Create an abstract Figure class with methods for calculating the area and perimeter, as well as a method that displays information about the figure on the screen. Create derived classes: Triangle (triangle), Circle (circle) with their own methods for calculating the area and perimeter. Create an array of n shapes and display full information about the shapes on the screen
