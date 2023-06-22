@@ -1,0 +1,121 @@
+using System;
+
+namespace ConsoleApp
+{
+    public abstract class Figure
+    {
+        public abstract double CalculateArea();
+        public abstract double CalculatePerimeter();
+        public abstract void PrintInfo();
+    }
+
+    public class Triangle : Figure
+    {
+        private double sideA;
+        private double sideB;
+        private double sideC;
+
+        public Triangle(double a, double b, double c)
+        {
+            sideA = a;
+            sideB = b;
+            sideC = c;
+        }
+
+        public override double CalculateArea()
+        {
+            double p = (sideA + sideB + sideC) / 2;
+            return Math.Sqrt(p * (p - sideA) * (p - sideB) * (p - sideC));
+        }
+
+        public override double CalculatePerimeter()
+        {
+            return sideA + sideB + sideC;
+        }
+
+        public override void PrintInfo()
+        {
+            Console.WriteLine("Треугольник:");
+            Console.WriteLine($"Сторона A: {sideA}");
+            Console.WriteLine($"Сторона B: {sideB}");
+            Console.WriteLine($"Сторона C: {sideC}");
+            Console.WriteLine($"Площадь: {CalculateArea()}");
+            Console.WriteLine($"Периметр: {CalculatePerimeter()}");
+            Console.WriteLine();
+        }
+    }
+
+    public class Circle : Figure
+    {
+        private double radius;
+
+        public Circle(double r)
+        {
+            radius = r;
+        }
+
+        public override double CalculateArea()
+        {
+            return Math.PI * radius * radius;
+        }
+
+        public override double CalculatePerimeter()
+        {
+            return 2 * Math.PI * radius;
+        }
+
+        public override void PrintInfo()
+        {
+            Console.WriteLine("Круг:");
+            Console.WriteLine($"Радиус: {radius}");
+            Console.WriteLine($"Площадь: {CalculateArea()}");
+            Console.WriteLine($"Периметр: {CalculatePerimeter()}");
+            Console.WriteLine();
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите количество фигур:");
+            int count = int.Parse(Console.ReadLine());
+
+            Figure[] figures = new Figure[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine($"Фигура {i + 1}:");
+                Console.WriteLine("Выберите тип фигуры (1 - треугольник, 2 - круг):");
+                int type = int.Parse(Console.ReadLine());
+
+                if (type == 1)
+                {
+                    Console.WriteLine("Введите стороны треугольника (через пробел):");
+                    string[] sides = Console.ReadLine().Split(' ');
+                    double a = double.Parse(sides[0]);
+                    double b = double.Parse(sides[1]);
+                    double c = double.Parse(sides[2]);
+                    figures[i] = new Triangle(a, b, c);
+                }
+                else if (type == 2)
+                {
+                    Console.WriteLine("Введите радиус круга:");
+                    double radius = double.Parse(Console.ReadLine());
+                    figures[i] = new Circle(radius);
+                }
+                else
+                {
+                    Console.WriteLine("Неверный тип фигуры. Пропускаем...");
+                    continue;
+                }
+            }
+
+            Console.WriteLine("\nИнформация о фигурах:");
+            foreach (var figure in figures)
+            {
+                figure.PrintInfo();
+            }
+        }
+    }
+}
